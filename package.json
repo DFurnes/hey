@@ -1,5 +1,5 @@
 {
-  "name": "hey-cli",
+  "name": "hey",
   "version": "0.0.1",
   "description": "A simple HTTP CLI tool.",
   "scripts": {
