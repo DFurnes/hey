@@ -48,6 +48,22 @@ class JsonFormatter {
     }
   }
 
+  printError(error, ms) {
+    let message = `${chalk.red.bold(error.code)} `;
+
+    let details;
+    switch (error.code) {
+      case 'ENOTFOUND': details = 'The URL could not be resolved.'; break;
+      default: details = 'An error occurred.';
+    }
+
+    message += chalk.red(details);
+    message += chalk.gray(` [${prettyMs(ms)}]`);
+    message += '\n';
+
+    this.spinner.fail(message);
+  }
+
   printData(response) {
       printJson(response.data);
   }
