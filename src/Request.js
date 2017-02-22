@@ -1,6 +1,8 @@
 const axios = require('axios');
 const normalizeUrl = require('normalize-url');
 const URL = require('url-parse');
+
+const configure = require('./configure');
 const { startTimer, endTimer } = require('./helpers');
 
 class Request {
@@ -9,11 +11,14 @@ class Request {
     options.url = new URL(normalizeUrl(options.url));
 
     this.options = options;
+
+    this.options = configure(options);
     this.formatter = formatter;
 
     // Re-cast the URL into a string for Axios.
     this.options.url = this.options.url.toString();
 
+    // Consider any completed response to be successful.
     this.options.validateStatus = function (status) {
       return true;
     };

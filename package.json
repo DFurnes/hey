@@ -15,6 +15,7 @@
     "chalk": "^1.1.3",
     "commander": "^2.9.0",
     "emphasize": "^1.2.0",
+    "find-config": "^1.0.0",
     "jsome": "^2.3.26",
     "jsonic": "^0.2.2",
     "lodash": "^4.17.4",
