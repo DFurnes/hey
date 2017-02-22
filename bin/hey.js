@@ -7,9 +7,9 @@ const pkg = require('../package.json');
 program
   .version(pkg.version)
   .command('get [endpoint]', 'Make a GET request.', {isDefault: true})
-  .command('post [endpoint] <data>', 'Make a POST request.', {isDefault: true})
-  .command('put [endpoint] <data>', 'Make a PUT request.', {isDefault: true})
-  .command('delete [endpoint]', 'Make a DELETE request.', {isDefault: true})
+  .command('post [endpoint] <data>', 'Make a POST request.')
+  .command('put [endpoint] <data>', 'Make a PUT request.')
+  .command('delete [endpoint]', 'Make a DELETE request.')
   .parse(process.argv);
 
 // Output help if no command is given.
