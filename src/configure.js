@@ -1,6 +1,19 @@
 const findConfig = require('find-config');
-const config = findConfig.require('.hey.js');
+const configFunction = findConfig.require('.hey.js');
 const find = require('lodash/find')
+const keytar = require('keytar');
+
+const config = configFunction({
+  basicauth: function(service, username) {
+    // @TODO: If not in keychain, prompt for password & store it.
+
+    return {
+      username: username,
+      password: keytar.getPassword(service, username)
+    };
+  }
+});
+
 
 /**
  * Load a configuration object based on the given options.
@@ -33,6 +46,7 @@ module.exports = function configure(options) {
   if (project) {
     if (project.forceSecure) options.url.set('protocol', 'https');
     if (project.url) options.url.set('hostname', project.url);
+    if (project.auth) options.auth = project.auth;
   }
 
   return options;
