@@ -28,7 +28,7 @@ class JsonFormatter {
   }
 
   printRequest(request) {
-    print(`${chalk.bgBlack.bold('▸ ' + request.method)} ${chalk.underline(request.url.href)}`);
+    print(`${chalk.bgBlack.bold('▸ ' + request.method)} ${chalk.underline(request.url)}`);
   }
 
   startRequest() {
