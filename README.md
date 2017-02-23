@@ -27,6 +27,11 @@ module.exports = function(hey) {
         
         // ↓ If a site should always use HTTPS, set the `forceSecure` flag!
         forceSecure: true,
+
+        // ↓ You can set default headers to be used on all requests:
+        headers: {
+          'X-Secret-API-Key': '5RROHSzXQwJ9douud9u5Ln4BR'
+        },
       },
    
       'basicauth-example-site': {

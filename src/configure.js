@@ -1,6 +1,7 @@
 const findConfig = require('find-config');
 const configFunction = findConfig.require('.hey.js');
 const find = require('lodash/find')
+const merge = require('lodash/merge');
 const keytar = require('keytar');
 const prompt = require('syncprompt');
 const chalk = require('chalk');
@@ -55,6 +56,7 @@ module.exports = function configure(options) {
     if (project.url) options.url.set('hostname', project.url);
     if (project.port) options.url.set('port', project.port);
     if (project.auth) options.auth = project.auth(options);
+    if (project.headers) options.headers = merge(project.headers, options.headers); 
   }
 
   return options;
