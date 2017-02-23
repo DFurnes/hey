@@ -6,6 +6,7 @@ const print = console.log;
 const printJson = require('jsome');
 const logSymbols = require('log-symbols');
 const emphasize = require('emphasize');
+const map = require('lodash/map');
 const { startTimer, endTimer } = require('./helpers');
 
 // json formatting
@@ -23,7 +24,8 @@ printJson.colors = {
 };
 
 class JsonFormatter {
-  constructor() {
+  constructor(mode = 0) {
+    this.mode = mode;
     this.spinner = null;
   }
 
@@ -54,27 +56,55 @@ class JsonFormatter {
     }
 
     let requestMessage = this.getRequestMessage(response.config);
-    let text = `${color.bold(response.status)} ${color(response.statusText)} ${requestMessage} `;
+    let text = `${color.bold(response.status)} ${color(response.statusText)} `;
+    
+    if (this.mode >= 1) {
+      text += requestMessage + ' ';
+    }
+
     text += chalk.gray(`[${prettyMs(ms)}]`);
     text += '\n';
 
     this.spinner.stopAndPersist({symbol, text});
+
+    // Print response headers in verbose mode.
+    if (this.mode >= 1 && response.headers) {
+      this.printHeaders(response);
+    }
+  }
+
+  printHeaders(response) {
+    map(response.headers, (value, key) => {
+      print(`${chalk.bold(key)}${chalk.gray(':')} ${chalk.yellow(value)}`);
+    });
+    print();
   }
 
   printError(error, ms) {
-    let message = `${chalk.red.bold(error.code)} `;
+    let requestMessage = this.getRequestMessage(error.config);
+    let text = `${chalk.red.bold(error.code)} `;
 
     let details;
     switch (error.code) {
-      case 'ENOTFOUND': details = 'The URL could not be resolved.'; break;
+      case 'ENOTFOUND': details = 'The URL didn\'t resolve.'; break;
       default: details = 'An error occurred.';
     }
 
-    message += chalk.red(details);
-    message += chalk.gray(` [${prettyMs(ms)}]`);
-    message += '\n';
+    text += chalk.red(details);
 
-    this.spinner.fail(message);
+    if (this.mode >= 1) {
+      text += ' ' + requestMessage;
+    }
+
+    text += chalk.gray(` [${prettyMs(ms)}]`);
+    text += '\n';
+
+    this.spinner.fail(text);
+
+    // Print full error details in verbose mode.
+    if (this.mode >= 1) {
+      console.error(error.stack);
+    }
   }
 
   printData(response) {

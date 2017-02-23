@@ -40,3 +40,10 @@ exports.parseData = function(data) {
 
   return { parsedData, headers };
 }
+
+/**
+ * Track verbosity CLI argument.
+ */
+exports.increaseVerbosity = function(v, total) {
+  return total + 1;
+}
