@@ -1,8 +1,13 @@
 #!/usr/bin/env node
 
-const chalk = require('chalk');
 const program = require('commander');
+const updateNotifier = require('update-notifier');
 const pkg = require('../package.json');
+
+
+// Notify the user if updates are available.
+const DAILY = 1000 * 60 * 60 * 24;
+updateNotifier({pkg, updateCheckInterval: DAILY}).notify();
 
 program
   .version(pkg.version)
