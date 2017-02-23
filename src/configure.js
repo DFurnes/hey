@@ -50,6 +50,7 @@ module.exports = function configure(options) {
   if (project) {
     if (project.forceSecure) options.url.set('protocol', 'https');
     if (project.url) options.url.set('hostname', project.url);
+    if (project.port) options.url.set('port', project.port);
     if (project.auth) options.auth = project.auth;
   }
 
