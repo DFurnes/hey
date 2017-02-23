@@ -27,12 +27,14 @@ class JsonFormatter {
     this.spinner = null;
   }
 
-  printRequest(request) {
-    print(`${chalk.bgBlack.bold('▸ ' + request.method)} ${chalk.underline(request.url)}`);
+  getRequestMessage(request) {
+    return `${chalk.bgBlack.bold(request.method)} ${chalk.underline(request.url)}`;
   }
 
-  startRequest() {
-    this.spinner = ora('Making request…').start();
+  startRequest(request) {
+    let message = this.getRequestMessage(request);
+
+    this.spinner = ora(message).start();
   }
 
   printResponse(response, ms) {
@@ -51,7 +53,8 @@ class JsonFormatter {
       color = chalk.cyan;
     }
 
-    let text= `${color.bold(response.status)} ${color(response.statusText)} `;
+    let requestMessage = this.getRequestMessage(response.config);
+    let text = `${color.bold(response.status)} ${color(response.statusText)} ${requestMessage} `;
     text += chalk.gray(`[${prettyMs(ms)}]`);
     text += '\n';
 

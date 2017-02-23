@@ -26,8 +26,7 @@ class Request {
 
   // Make the this.options and print output:
   send() {
-    this.formatter.printRequest(this.options);
-    const spinner = this.formatter.startRequest();
+    this.formatter.startRequest(this.options);
     const timer = startTimer();
 
     axios(this.options)
