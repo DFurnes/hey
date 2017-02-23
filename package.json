@@ -25,8 +25,8 @@
     "normalize-url": "^1.9.0",
     "ora": "^1.1.0",
     "pretty-ms": "^2.1.0",
-    "prompt-sync": "^4.1.4",
     "qs": "^6.3.1",
+    "syncprompt": "^1.0.1",
     "update-notifier": "^2.1.0",
     "url-parse": "^1.1.8"
   }

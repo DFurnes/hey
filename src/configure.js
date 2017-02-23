@@ -2,20 +2,23 @@ const findConfig = require('find-config');
 const configFunction = findConfig.require('.hey.js');
 const find = require('lodash/find')
 const keytar = require('keytar');
-const prompt = require('prompt-sync')();
+const prompt = require('syncprompt');
 const chalk = require('chalk');
 
 const config = configFunction({
-  basicauth: function(service, username) {
-    let password = keytar.getPassword(service, username);
+  basicauth: function(username) {
+    return (options) => {
+      const service = options.url.hostname;
+      let password = keytar.getPassword(service, username);
 
-    if (!password) {
-      password = prompt.hide(`Enter ${chalk.bold(username)}'s password for ${chalk.bold(service)}: `);
-      keytar.addPassword(service, username, password);
+      if (!password) {
+        password = prompt(`Enter ${chalk.bold(username)}'s password for ${chalk.bold(service)}: `, { secure: true });
+        keytar.addPassword(service, username, password);
+      }
+
+      return { username, password };
     }
-
-    return { username, password };
-  }
+  },
 });
 
 
@@ -51,7 +54,7 @@ module.exports = function configure(options) {
     if (project.forceSecure) options.url.set('protocol', 'https');
     if (project.url) options.url.set('hostname', project.url);
     if (project.port) options.url.set('port', project.port);
-    if (project.auth) options.auth = project.auth;
+    if (project.auth) options.auth = project.auth(options);
   }
 
   return options;
