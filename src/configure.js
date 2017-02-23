@@ -2,15 +2,19 @@ const findConfig = require('find-config');
 const configFunction = findConfig.require('.hey.js');
 const find = require('lodash/find')
 const keytar = require('keytar');
+const prompt = require('prompt-sync')();
+const chalk = require('chalk');
 
 const config = configFunction({
   basicauth: function(service, username) {
-    // @TODO: If not in keychain, prompt for password & store it.
+    let password = keytar.getPassword(service, username);
 
-    return {
-      username: username,
-      password: keytar.getPassword(service, username)
-    };
+    if (!password) {
+      password = prompt.hide(`Enter ${chalk.bold(username)}'s password for ${chalk.bold(service)}: `);
+      keytar.addPassword(service, username, password);
+    }
+
+    return { username, password };
   }
 });
 
