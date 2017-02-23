@@ -34,8 +34,8 @@ module.exports = function(hey) {
         forceSecure: true,
         
         // ↓ Automatically load password from the system keychain and set HTTP Basic Auth
-        //   header by using `hey.basicauth()` with the domain name and username.
-        auth: hey.basicauth('secure.mcommons.com', 'dfurnes@dosomething.org'),
+        //   header by using `hey.basicauth('<username>')`. Will prompt on first request.
+        auth: hey.basicauth('username@example.com'),
       },
     },
   };
