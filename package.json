@@ -1,6 +1,6 @@
 {
   "name": "@dfurnes/hey",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A simple HTTP CLI tool.",
   "scripts": {
     "test": "mocha tests/**/*.js --slow=15000 --timeout=20000"
