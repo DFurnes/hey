@@ -6,6 +6,11 @@
   <strong>hey (n.)</strong> – A handy command-line tool for making HTTP requests.
 </p>
 
+<p align="center">
+  <a href="https://travis-ci.org/DFurnes/hey"><img alt="Build Status" src="https://travis-ci.org/DFurnes/hey.svg?branch=master"></a>   <a href="https://npmjs.org/package/@dfurnes/hey"><img alt="NPM" src="https://img.shields.io/npm/v/@dfurnes/hey.svg"></a>
+</p>
+<br/>
+
 ### Installation
 You can install __Hey__ using [npm](https://npmjs.org):
 
