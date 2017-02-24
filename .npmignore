@@ -1,0 +1,8 @@
+# from gitignore
+node_modules
+.DS_Store
+
+# test files
+__snapshots__
+tests
+mocks

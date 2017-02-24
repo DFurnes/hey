@@ -3,10 +3,13 @@
   "version": "0.0.2",
   "description": "A simple HTTP CLI tool.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha tests/**/*.js --slow=15000 --timeout=20000"
   },
   "bin": {
     "hey": "./bin/hey.js"
+  },
+  "directories": {
+    "test": "tests/"
   },
   "author": "David Furnes <david@dfurnes.com>",
   "license": "MIT",
@@ -29,5 +32,13 @@
     "syncprompt": "^1.0.1",
     "update-notifier": "^2.1.0",
     "url-parse": "^1.1.8"
+  },
+  "devDependencies": {
+    "bluebird": "^3.4.7",
+    "intelli-espower-loader": "^1.0.1",
+    "interfake": "^1.19.0",
+    "mocha": "^3.2.0",
+    "power-assert": "^1.4.2",
+    "snap-shot": "^2.16.0"
   }
 }
