@@ -1,2 +1,10 @@
-exports['can request json 2'] = "{\n  created: true\n}\n"
+exports['can make a POST request 1'] = "{\n}\n"
+
+exports['can post json body 1'] = "{\n  title: \"JSON, woo!\"\n}\n"
+
+exports['can post json body 2'] = "{\n  title: \"JSON, woo!,\"\n}\n"
+
+exports['can post form-encoded body 1'] = "{\n  title: \"Hello World\"\n}\n"
+
+exports['can post plain-text body 1'] = "{\n}\n"
 
