@@ -6,7 +6,7 @@ const keytar = require('keytar');
 const prompt = require('syncprompt');
 const chalk = require('chalk');
 
-const config = configFunction({
+const config = configFunction ? configFunction({
   basicauth: function(username) {
     return (options) => {
       const service = options.url.hostname;
@@ -20,7 +20,7 @@ const config = configFunction({
       return { username, password };
     }
   },
-});
+}) : {};
 
 
 /**

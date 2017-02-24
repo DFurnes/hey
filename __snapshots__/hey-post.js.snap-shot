@@ -1,0 +1,2 @@
+exports['can request json 2'] = "{\n  created: true\n}\n"
+
