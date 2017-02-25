@@ -1,0 +1,2 @@
+exports['can make a DELETE request 1'] = "Deleted.\n"
+

@@ -1,16 +1,19 @@
-const Promise = require('bluebird');
+const { execSync, spawn } = require('child_process');
+const onCleanup = require('node-cleanup');
 const path = require('path');
-const exec = require('child_process').execSync;
-const spawn = require('child_process').spawn;
 
-var bin = path.join(__dirname, '../bin/hey.js');
+// Set working directory to `tests/`.
+process.chdir(__dirname);
 
-// Start the mock HTTP server.
-spawn('node', [path.join(__dirname, '../mocks/index.js')]);
+// Start the mock HTTP server as a child process.
+const server = spawn('node', [path.join(__dirname, '../mock-server.js')]);
+onCleanup(() => server.kill());
 
 /**
  * Test the given Hey command.
  */
 exports.command = function(command = '') {
-  return exec(`${bin} ${command}`, {stdio: 'pipe'}).toString();
+  var bin = path.join(__dirname, '../bin/hey.js');
+  return execSync(`${bin} ${command}`, {stdio: 'pipe'}).toString();
 };
+

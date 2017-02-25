@@ -1,0 +1,8 @@
+exports['can make a POST request 1'] = "{\n  id: 3,\n  title: \"Hello World\"\n}\n"
+
+exports['can post form-encoded body 1'] = "{\n  id: 3,\n  title: \"Hello World\"\n}\n"
+
+exports['can post json body 1'] = "{\n  id: 3,\n  title: \"JSON\"\n}\n"
+
+exports['can post lazy json 1'] = "{\n  id: 3,\n  title: \"JSON\"\n}\n"
+

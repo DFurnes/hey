@@ -1,2 +1,0 @@
-exports['can request json 1'] = "{\n  greeting: \"Hello World!\"\n}\n"
-

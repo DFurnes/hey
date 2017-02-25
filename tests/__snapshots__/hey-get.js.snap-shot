@@ -1,0 +1,2 @@
+exports['can request json 1'] = "{\n  id: \"2\",\n  title: \"Hello World\"\n}\n"
+

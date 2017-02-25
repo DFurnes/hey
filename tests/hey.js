@@ -3,8 +3,8 @@ const snapshot = require('snap-shot')
 const { command } = require('./helpers');
 
 describe('hey', () => {
-  it('should make a get request by default', () => {
-    const result = command('http://localhost:3000/hello');
+  it('should make a GET request by default', () => {
+    const result = command('http://localhost:3000/posts');
 
     snapshot(result);
   });

@@ -1,4 +1,4 @@
-exports['should make a get request by default 1'] = "{\n  greeting: \"Hello World!\"\n}\n"
+exports['should make a GET request by default 1'] = "Cannot GET /posts\n\n"
 
 exports['should show help menu with --help 1'] = "\n  Usage: hey [options] [command]\n\n\n  Commands:\n\n    get [endpoint]          Make a GET request.\n    post [endpoint] <data>  Make a POST request.\n    put [endpoint] <data>   Make a PUT request.\n    delete [endpoint]       Make a DELETE request.\n    help [cmd]              display help for [cmd]\n\n  Options:\n\n    -h, --help     output usage information\n    -V, --version  output the version number\n\n"
 

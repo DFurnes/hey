@@ -34,10 +34,12 @@
     "url-parse": "^1.1.8"
   },
   "devDependencies": {
-    "bluebird": "^3.4.7",
+    "babel-core": "^6.23.1",
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1",
     "intelli-espower-loader": "^1.0.1",
-    "interfake": "^1.19.0",
     "mocha": "^3.2.0",
+    "node-cleanup": "^2.1.2",
     "power-assert": "^1.4.2",
     "snap-shot": "^2.16.0"
   }

@@ -1,0 +1,6 @@
+exports['can make a PUT request 1'] = "{\n  id: 3,\n  title: \"Hello World\"\n}\n"
+
+exports['can put form-encoded body 1'] = "Cannot PUT /posts\n\n"
+
+exports['can put json body 1'] = "Cannot PUT /posts\n\n"
+
