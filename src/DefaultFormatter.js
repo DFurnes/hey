@@ -34,7 +34,8 @@ class DefaultFormatter {
   startRequest(request) {
     let message = this.getRequestMessage(request);
 
-    this.spinner = ora(message).start();
+    this.spinner = ora({message, stream: process.stdout});
+    this.spinner.start();
   }
 
   printResponse(response, ms) {
