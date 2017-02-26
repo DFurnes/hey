@@ -1,19 +1,21 @@
 const program = require('commander');
 const Request = require('../src/Request');
 const DefaultFormatter = require('../src/DefaultFormatter');
-const { increaseVerbosity } = require('../src/helpers');
+const { collectHeaders, increaseVerbosity } = require('../src/helpers');
 
 // cli
 program
-  .usage('[endpoint]')
+  .usage('<url>')
   .description('Make a GET request.')
+  .option('-H, --header <values>', 'Set the request headers.', collectHeaders, {})
   .option('-v, --verbose', 'Increase the verbosity of the formatter.', increaseVerbosity, 0)
-  .action(function(endpoint) {
-    let formatter = new DefaultFormatter(this.verbose);
+  .action(function(url) {
+    const formatter = new DefaultFormatter(this.verbose);
 
     const request = new Request({
       method: 'GET',
-      url: endpoint,
+      url: url,
+      headers: this.header
     }, formatter);
 
     request.send();

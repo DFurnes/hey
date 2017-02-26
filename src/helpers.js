@@ -1,6 +1,7 @@
 const jsonic = require('jsonic');
 const qs = require('qs');
 const trim = require('lodash/trim');
+const mapKeys = require('lodash/mapKeys');
 
 /**
  * Start a timer.
@@ -25,7 +26,7 @@ exports.endTimer = function(start) {
  * Parse CLI input into the appropriate request payload.
  */
 exports.parseData = function(data) {
-  let parsedData, headers;
+  let parsedData = null, headers = {};
 
   data = trim(data, `'"`);
   if (data && typeof data === 'string') {
@@ -41,6 +42,23 @@ exports.parseData = function(data) {
   }
 
   return { parsedData, headers };
+}
+
+/**
+ * Collect one or more header options.
+ *
+ * @return {Object} - parsed headers
+ */
+exports.collectHeaders = function(value, headers) {
+  const values = value.split(',');
+
+  for (let i = 0; i < values.length; i++) {
+    let [ header, value ] = values[i].split(/[=:]/, 2);
+
+    headers[header] = value;
+  }
+
+  return headers;
 }
 
 /**
