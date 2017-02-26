@@ -1,5 +1,4 @@
 const chalk = require('chalk');
-const axios = require('axios');
 const ora = require('ora');
 const prettyMs = require('pretty-ms');
 const print = console.log;
@@ -7,7 +6,6 @@ const printJson = require('jsome');
 const logSymbols = require('log-symbols');
 const emphasize = require('emphasize');
 const map = require('lodash/map');
-const { startTimer, endTimer } = require('./helpers');
 
 // json formatting
 printJson.colors = {
@@ -23,10 +21,10 @@ printJson.colors = {
   'brack': 'grey',
 };
 
-class JsonFormatter {
+class DefaultFormatter {
   constructor(mode = 0) {
-    this.mode = mode;
     this.spinner = null;
+    this.mode = mode;
   }
 
   getRequestMessage(request) {
@@ -57,7 +55,7 @@ class JsonFormatter {
 
     let requestMessage = this.getRequestMessage(response.config);
     let text = `${color.bold(response.status)} ${color(response.statusText)} `;
-    
+
     if (this.mode >= 1) {
       text += requestMessage + ' ';
     }
@@ -130,4 +128,4 @@ class JsonFormatter {
   }
 }
 
-module.exports = JsonFormatter;
+module.exports = DefaultFormatter;
