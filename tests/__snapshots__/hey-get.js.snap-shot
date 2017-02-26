@@ -1,2 +1,6 @@
-exports['can request json 1'] = "{\n  id: \"2\",\n  title: \"Hello World\"\n}\n"
+exports['can request json 1'] = {
+  "status": 0,
+  "output": "✔ 200 OK [##ms]\n\n{\n  id: \"2\",\n  title: \"Hello World\"\n}\n",
+  "error": ""
+}
 

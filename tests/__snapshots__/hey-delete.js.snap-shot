@@ -1,2 +1,6 @@
-exports['can make a DELETE request 1'] = "Deleted.\n"
+exports['can make a DELETE request 1'] = {
+  "status": 0,
+  "output": "✔ 200 OK [##ms]\n\nDeleted.\n",
+  "error": ""
+}
 

@@ -1,4 +1,4 @@
-const { execSync, spawn } = require('child_process');
+const { spawnSync, spawn } = require('child_process');
 const onCleanup = require('node-cleanup');
 const path = require('path');
 
@@ -13,7 +13,22 @@ onCleanup(() => server.kill());
  * Test the given Hey command.
  */
 exports.command = function(command = '') {
-  var bin = path.join(__dirname, '../bin/hey.js');
-  return execSync(`${bin} ${command}`, {stdio: 'pipe'}).toString();
+  const bin = path.join(__dirname, '../bin/hey.js');
+  const args = command.length ? command.split(' ') : [];
+
+  const result = spawnSync(bin, args);
+
+  return {
+    status: result.status,
+    output: processOutput(result.stdout.toString()),
+    error: result.stderr.toString(),
+  };
+};
+
+/**
+ * Remove request timer from output so we can snapshot.
+ */
+function processOutput(string) {
+    return string.replace(/\[[0-9]*\ms]/, '[##ms]');
 };
 

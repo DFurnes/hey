@@ -4,28 +4,28 @@ const { command } = require('./helpers');
 
 describe('hey post', () => {
   it('can make a POST request', () => {
-    const response = command('post http://localhost:3000/posts');
-    snapshot(response);
+    const result = command('post http://localhost:3000/posts');
+    snapshot(result);
   });
 
   it('can post form-encoded body', () => {
-    const response = command('post http://localhost:3000/posts title="Hello World"');
-    snapshot(response);
+    const result = command('post http://localhost:3000/posts title="Hello World"');
+    snapshot(result);
   });
 
   it('can post json body', () => {
-    const response = command('post http://localhost:3000/posts \'{title:"JSON"}\'');
-    snapshot(response);
+    const result = command(`post http://localhost:3000/posts '{"title":"JSON"}'`);
+    snapshot(result);
   });
 
   it('can post lazy json', () => {
-    const response = command('post http://localhost:3000/posts title:"JSON"');
-    snapshot(response);
+    const result = command('post http://localhost:3000/posts title:"JSON"');
+    snapshot(result);
   });
 
   // @TODO: Figure out a fix for this! :(
   it.skip('can post lazy json with special characters', () => {
-    const response = command('post http://localhost:3000/posts title:"JSON, woo!"');
-    snapshot(response);
+    const result = command('post http://localhost:3000/posts title:"JSON, woo!"');
+    snapshot(result);
   });
 });
