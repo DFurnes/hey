@@ -1,5 +1,6 @@
 const jsonic = require('jsonic');
 const qs = require('qs');
+const trim = require('lodash/trim');
 
 /**
  * Start a timer.
@@ -26,6 +27,7 @@ exports.endTimer = function(start) {
 exports.parseData = function(data) {
   let parsedData, headers;
 
+  data = trim(data, `'"`);
   if (data && typeof data === 'string') {
     if (data.includes(':')) {
       parsedData = jsonic(data);
