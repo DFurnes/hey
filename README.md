@@ -24,11 +24,11 @@ You can set aliases and default request options by creating a `.hey.js` file in 
 ```js
 module.exports = function(hey) {
   return {
-    projects: {
-      // ↓ You can add aliases for favorite sites, so you can just
-      //   type `hey get example/page` to load "www.example.com/page`!
-      'example': {
-        url: 'www.example.com',
+    sites: {
+      'www.example.com': {
+        // ↓ You can add aliases for favorite sites, so you can just
+        //   type `hey get example/page` to load "www.example.com/page`!
+        alias: 'example',
         
         // ↓ If a site should always use HTTPS, set the `forceSecure` flag!
         forceSecure: true,
@@ -39,8 +39,8 @@ module.exports = function(hey) {
         },
       },
    
-      'basicauth-example-site': {
-        url: 'example.com',
+      'www.example.org': {
+        alias: 'auth-example',
         forceSecure: true,
         
         // ↓ Automatically load password from the system keychain and set HTTP Basic Auth

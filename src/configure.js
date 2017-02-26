@@ -1,6 +1,6 @@
 const findConfig = require('find-config');
 const configFunction = findConfig.require('.hey.js');
-const find = require('lodash/find')
+const findKey = require('lodash/findKey')
 const merge = require('lodash/merge');
 const keytar = require('keytar');
 const prompt = require('syncprompt');
@@ -26,17 +26,17 @@ const config = configFunction ? configFunction({
 /**
  * Load a configuration object based on the given options.
  */
-function getProjectConfig(options) {
+function getSite(options) {
   const hostname = options.url.hostname;
 
-  if (config && config.projects) {
-    // First, try loading a config by project alias:
-    if (config.projects[hostname]) {
-      return config.projects[hostname];
+  if (config && config.sites) {
+    // First, try loading a config by hostname:
+    if (config.sites[hostname]) {
+      return hostname;
     }
 
-    // Otherwise, try to find config by matching hostname:
-    return find(config.projects, {url: hostname});
+    // Otherwise, try to find config by matching alias::
+    return findKey(config.sites, {alias: hostname});
   }
 
   return null;
@@ -49,14 +49,16 @@ function getProjectConfig(options) {
  * @return {Object}
  */
 module.exports = function configure(options) {
-  const project = getProjectConfig(options);
+  const hostname = getSite(options);
 
-  if (project) {
-    if (project.forceSecure) options.url.set('protocol', 'https');
-    if (project.url) options.url.set('hostname', project.url);
-    if (project.port) options.url.set('port', project.port);
-    if (project.auth) options.auth = project.auth(options);
-    if (project.headers) options.headers = merge(project.headers, options.headers); 
+  if (hostname) {
+    let site = config.sites[hostname];
+
+    if (site.alias) options.url.set('hostname', hostname);
+    if (site.forceSecure) options.url.set('protocol', 'https');
+    if (site.port) options.url.set('port', site.port);
+    if (site.auth) options.auth = site.auth(options);
+    if (site.headers) options.headers = merge(site.headers, options.headers); 
   }
 
   return options;
