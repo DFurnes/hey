@@ -2,7 +2,14 @@
 
 const program = require('commander');
 const updateNotifier = require('update-notifier');
+const semver = require('semver');
 const pkg = require('../package.json');
+
+// Check minimum required Node.js version.
+if (!semver.satisfies(process.version, pkg.engines.node)) {
+  console.error('Hey requires Node 6.x or greater. You\'re running Node ' + process.version + '.');
+  process.exit(1);
+}
 
 // Notify the user if updates are available.
 const DAILY = 1000 * 60 * 60 * 24;
