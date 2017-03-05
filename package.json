@@ -1,6 +1,6 @@
 {
   "name": "@dfurnes/hey",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A simple HTTP CLI tool.",
   "engines": {
     "node": ">=6.0"
