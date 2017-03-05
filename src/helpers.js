@@ -53,9 +53,13 @@ exports.collectHeaders = function(value, headers) {
   const values = value.split(',');
 
   for (let i = 0; i < values.length; i++) {
-    let [ header, value ] = values[i].split(/[=:]/, 2);
+    let split = values[i].match(/[=:]/);
+    if (split) {
+      let header = values[i].slice(0, split.index);
+      let value = values[i].slice(split.index + 1);
 
-    headers[header] = value;
+      headers[header] = value;
+    }
   }
 
   return headers;
