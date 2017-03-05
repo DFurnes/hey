@@ -1,33 +1,44 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const multiparty = require('connect-multiparty');
+const mapValues = require('lodash/mapValues');
 const app = express();
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(multiparty());
 
-// Mock
-const post = ({id, title = 'Hello World'}) => ({id, title});
-
-// Routes
-app.get('/posts/:id', (req, res) => {
-  res.status(200).json(post({id: req.params.id, title: 'Hello World'}));
-});
-
-app.post('/posts', (req, res) => {
-  res.status(201).json(post({id: 3, title: req.body.title}));
-});
-
-app.put('/posts/:id', (req, res) => {
-  res.status(200).json(post({id: 3, title: req.body.title}));
-});
-
-app.delete('/posts/:id', (req, res) => {
-  res.status(200).set('Content-Type', 'text/plain').send('Deleted.');
-});
-
+// Status Code
 app.get('/status/:code', (req, res) => {
   res.status(req.params.code).end();
 });
+
+// Echo Request
+app.all(/^\/(get|post|patch|put|delete)$/, (req, res) => {
+  // Return 405 if not the proper HTTP method.
+  if (req.method.toLowerCase() !== req.path.replace('/', '')) {
+    return res.status(405).end();
+  }
+
+  res.json({
+    url: req.protocol + '://' + req.get('Host') + req.url,
+    query: req.query,
+    body: req.body,
+    files: mapValues(req.files, file => {
+      return { name: file.name, type: file.type, size: file.size };
+    }),
+    headers: req.headers,
+  });
+});
+
+// Delay
+app.get('/delay/:seconds', (req, res) => {
+  const seconds = parseInt(req.params.seconds) || 0;
+  const ms = seconds * 1000;
+
+  setTimeout(() => res.json({seconds}), ms);
+});
+
 
 // Start the server!
 app.listen(3000, () => console.log('Running mock server on 3000'));

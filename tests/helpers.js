@@ -29,6 +29,6 @@ exports.command = function(command = '') {
  * Remove request timer from output so we can snapshot.
  */
 function processOutput(string) {
-    return string.replace(/\[[0-9]*\ms]/, '[##ms]');
+  return string.replace(/\[[0-9]*\ms]/, '[##ms]').replace(/axios\/[0-9]*\.[0-9]*\.[0-9]*/, 'axios/X.X.X');
 };
 
