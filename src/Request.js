@@ -1,4 +1,5 @@
 const axios = require('axios');
+const appendQuery = require('append-query');
 const normalizeUrl = require('normalize-url');
 const URL = require('url-parse');
 
@@ -9,6 +10,11 @@ class Request {
   constructor(options, formatter) {
     // Normalize and parse object for URL.
     options.url = new URL(normalizeUrl(options.url));
+
+    // Append any given query string values to the URL.
+    if (options.query) {
+      options.url.query = appendQuery(options.url.query, options.query);
+    }
 
     this.options = options;
 
