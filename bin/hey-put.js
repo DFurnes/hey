@@ -1,14 +1,14 @@
 const program = require('commander');
 const Request = require('../src/Request');
 const DefaultFormatter = require('../src/DefaultFormatter');
-const { parseData, collectHeaders, increaseVerbosity } = require('../src/helpers');
+const { parseData, collectKeyValues, increaseVerbosity } = require('../src/helpers');
 const merge = require('lodash/merge');
 
 // cli
 program
   .usage('[endpoint] <data>')
   .description('Make a PUT request.')
-  .option('-H, --header <values>', 'Set the request headers.', collectHeaders, {})
+  .option('-H, --header <values>', 'Set the request headers.', collectKeyValues, {})
   .option('-v, --verbose', 'Increase the verbosity of the formatter.', increaseVerbosity, 0)
   .action(function(endpoint, data) {
     let formatter = new DefaultFormatter(this.verbose);

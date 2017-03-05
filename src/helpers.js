@@ -45,11 +45,11 @@ exports.parseData = function(data) {
 }
 
 /**
- * Collect one or more header options.
+ * Collect one or more key-value options.
  *
  * @return {Object} - parsed headers
  */
-exports.collectHeaders = function(value, headers) {
+exports.collectKeyValues = function(value, headers) {
   const values = value.split(',');
 
   for (let i = 0; i < values.length; i++) {
