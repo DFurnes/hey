@@ -41,6 +41,10 @@ class Command {
   makeRequest(url, data) {
     let formatter = new DefaultFormatter(this.verbose);
 
+    // Fix awkward Commander.js behavior w/ optional args.
+    if (data instanceof program.Command) {
+      data = null;
+    }
 
     if (data && this.commandOptions['body']) {
       const { headers, parsedData } = parseData(data);
