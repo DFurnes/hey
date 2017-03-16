@@ -43,8 +43,8 @@ class Command {
 
       if (data && this.options['body']) {
         const { headers, parsedData } = parseData(data);
-        this.options.headers = merge(headers, this.header),
-          this.options.data = parsedData;
+        this.options.headers = merge(headers, this.header);
+        this.options.data = parsedData;
       }
     });
 
@@ -53,6 +53,7 @@ class Command {
     // Merge the command-line flags into the options,
     this.options = merge(this.options, {
       query: this.program.query,
+      headers: this.program.header,
       verbose: this.program.verbose,
     });
 
