@@ -5,26 +5,19 @@ const { parseData, collectKeyValues, increaseVerbosity } = require('../src/helpe
 const merge = require('lodash/merge');
 
 class Command {
-  constructor(input) {
+  constructor(defaults = {}) {
     this.program = program;
-    this.input = input;
 
-    this.commandOptions = {'body': []};
+    this.options = merge({'body': []}, defaults);
 
+    // Set options for the command.
     this.program
       .option('-H, --header <values>', 'Set the request headers.', collectKeyValues, {})
       .option('-q, --query <values>', 'Set the request query-string.', collectKeyValues, {})
       .option('-v, --verbose', 'Increase the verbosity of the formatter.', increaseVerbosity, 0);
 
-    this.makeRequest = this.makeRequest.bind(this);
-  }
-
-  /**
-   * Set an option on the command.
-   */
-  set(key, value) {
-    this.commandOptions[key] = value;
-    return this;
+    // Set the usage for the 'help' command.
+    this.program.usage(`<url> ${this.options['body'] ? '[data]' : '' }`);
   }
 
   /**
@@ -36,39 +29,42 @@ class Command {
   }
 
   /**
-   * Make the request.
+   * Parse the expected command arguments and options.
    */
-  makeRequest(url, data) {
-    let formatter = new DefaultFormatter(this.verbose);
+  parse(argv) {
+    // Parse arguments passed to the command.
+    this.program.action((url, data) => {
+      // Fix awkward Commander.js behavior w/ optional args.
+      if (data instanceof program.Command) {
+        data = null;
+      }
 
-    // Fix awkward Commander.js behavior w/ optional args.
-    if (data instanceof program.Command) {
-      data = null;
-    }
+      this.options.url = url;
 
-    if (data && this.commandOptions['body']) {
-      const { headers, parsedData } = parseData(data);
-      this.commandOptions.headers = merge(headers, this.header),
-        this.commandOptions.data = parsedData;
-    }
+      if (data && this.options['body']) {
+        const { headers, parsedData } = parseData(data);
+        this.options.headers = merge(headers, this.header),
+          this.options.data = parsedData;
+      }
+    });
 
-    const request = new Request(merge(this.commandOptions, {
-      url: url,
-      query: this.query,
-    }), formatter);
+    this.program.parse(argv);
 
-    request.send();
+    return this;
   }
 
   /**
    * Run the command.
    */
   run() {
-    this.program.usage(`<url> ${this.commandOptions['body'] ? '[data]' : '' }`);
+    if (this.options.url) {
+      const formatter = new DefaultFormatter(program.verbose);
+      const request = new Request(merge(this.options, {
+        query: program.query,
+      }), formatter);
 
-    this.program.action(this.makeRequest);
-
-    this.program.parse(this.input);
+      request.send();
+    }
   }
 }
 

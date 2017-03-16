@@ -1,7 +1,7 @@
 const Command = require('../src/Command');
 
 // $ hey post <url> [data]
-new Command(process.argv)
+new Command({method: 'POST'})
   .description('Make a POST request')
-  .set('method', 'POST')
+  .parse(process.argv)
   .run();

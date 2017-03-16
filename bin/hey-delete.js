@@ -1,7 +1,7 @@
 const Command = require('../src/Command');
 
 // $ hey delete <url> [data]
-new Command(process.argv)
+new Command({method: 'DELETE'})
   .description('Make a DELETE request')
-  .set('method', 'DELETE')
+  .parse(process.argv)
   .run();
