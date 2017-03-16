@@ -20,6 +20,12 @@ app.all(/^\/(get|post|patch|put|delete)$/, (req, res) => {
     return res.status(405).end();
   }
 
+  // Ensure headers are sorted.
+  let headers = {};
+  Object.keys(req.headers).sort().forEach(key => {
+    headers[key] = req.headers[key];
+  })
+
   res.json({
     url: req.protocol + '://' + req.get('Host') + req.url,
     query: req.query,
@@ -27,7 +33,7 @@ app.all(/^\/(get|post|patch|put|delete)$/, (req, res) => {
     files: mapValues(req.files, file => {
       return { name: file.name, type: file.type, size: file.size };
     }),
-    headers: req.headers,
+    headers: headers,
   });
 });
 
