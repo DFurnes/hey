@@ -27,10 +27,16 @@ program
   .command('get [endpoint]', 'Make a GET request.', {isDefault: true})
   .command('post [endpoint] <data>', 'Make a POST request.')
   .command('put [endpoint] <data>', 'Make a PUT request.')
-  .command('delete [endpoint]', 'Make a DELETE request.')
-  .parse(process.argv);
+  .command('delete [endpoint]', 'Make a DELETE request.');
 
 // Output help if no command is given.
 if (!process.argv.slice(2).length) {
-  program.outputHelp();
+  program._name = 'hey';
+  program.addImplicitHelpCommand();
+  program.help();
+
+  process.exit(1);
 }
+
+program.parse(process.argv);
+
