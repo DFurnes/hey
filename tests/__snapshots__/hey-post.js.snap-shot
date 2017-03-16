@@ -1,24 +1,24 @@
 exports['can make a POST request 1'] = {
   "status": 0,
-  "output": "✔ 200 OK [##ms]\n\n{\n  url: \"http://localhost:3000/post\",\n  query: {\n  },\n  body: {\n  },\n  files: {\n  },\n  headers: {\n    accept: \"application/json, text/plain, */*\",\n    content-type: \"text/plain\",\n    user-agent: \"axios/X.X.X\",\n    content-length: \"15\",\n    host: \"localhost:3000\",\n    connection: \"close\"\n  }\n}\n",
+  "output": "✔ 200 OK [##ms]\n\n{\n  url: \"http://localhost:3000/post\",\n  query: {\n  },\n  body: {\n  },\n  files: {\n  },\n  headers: {\n    accept: \"application/json, text/plain, */*\",\n    connection: \"close\",\n    content-length: \"0\",\n    host: \"localhost:3000\",\n    user-agent: \"axios/X.X.X\"\n  }\n}\n",
   "error": ""
 }
 
 exports['can post form-encoded body 1'] = {
   "status": 0,
-  "output": "✔ 200 OK [##ms]\n\n{\n  url: \"http://localhost:3000/post\",\n  query: {\n  },\n  body: {\n    title: \"\"Hello\"\n  },\n  files: {\n  },\n  headers: {\n    accept: \"application/json, text/plain, */*\",\n    content-type: \"application/x-www-form-urlencoded\",\n    user-agent: \"axios/X.X.X\",\n    content-length: \"14\",\n    host: \"localhost:3000\",\n    connection: \"close\"\n  }\n}\n",
+  "output": "✔ 200 OK [##ms]\n\n{\n  url: \"http://localhost:3000/post\",\n  query: {\n  },\n  body: {\n    title: \"\"Hello\"\n  },\n  files: {\n  },\n  headers: {\n    accept: \"application/json, text/plain, */*\",\n    connection: \"close\",\n    content-length: \"14\",\n    content-type: \"application/x-www-form-urlencoded\",\n    host: \"localhost:3000\",\n    user-agent: \"axios/X.X.X\"\n  }\n}\n",
   "error": ""
 }
 
 exports['can post json body 1'] = {
   "status": 0,
-  "output": "✔ 200 OK [##ms]\n\n{\n  url: \"http://localhost:3000/post\",\n  query: {\n  },\n  body: {\n    title: \"JSON\"\n  },\n  files: {\n  },\n  headers: {\n    accept: \"application/json, text/plain, */*\",\n    content-type: \"application/json;charset=utf-8\",\n    user-agent: \"axios/X.X.X\",\n    content-length: \"16\",\n    host: \"localhost:3000\",\n    connection: \"close\"\n  }\n}\n",
+  "output": "✔ 200 OK [##ms]\n\n{\n  url: \"http://localhost:3000/post\",\n  query: {\n  },\n  body: {\n    title: \"JSON\"\n  },\n  files: {\n  },\n  headers: {\n    accept: \"application/json, text/plain, */*\",\n    connection: \"close\",\n    content-length: \"16\",\n    content-type: \"application/json;charset=utf-8\",\n    host: \"localhost:3000\",\n    user-agent: \"axios/X.X.X\"\n  }\n}\n",
   "error": ""
 }
 
 exports['can post lazy json 1'] = {
   "status": 0,
-  "output": "✔ 200 OK [##ms]\n\n{\n  url: \"http://localhost:3000/post\",\n  query: {\n  },\n  body: {\n    title: \"\"JSON\"\n  },\n  files: {\n  },\n  headers: {\n    accept: \"application/json, text/plain, */*\",\n    content-type: \"application/json;charset=utf-8\",\n    user-agent: \"axios/X.X.X\",\n    content-length: \"18\",\n    host: \"localhost:3000\",\n    connection: \"close\"\n  }\n}\n",
+  "output": "✔ 200 OK [##ms]\n\n{\n  url: \"http://localhost:3000/post\",\n  query: {\n  },\n  body: {\n    title: \"\"JSON\"\n  },\n  files: {\n  },\n  headers: {\n    accept: \"application/json, text/plain, */*\",\n    connection: \"close\",\n    content-length: \"18\",\n    content-type: \"application/json;charset=utf-8\",\n    host: \"localhost:3000\",\n    user-agent: \"axios/X.X.X\"\n  }\n}\n",
   "error": ""
 }
 
