@@ -57,14 +57,18 @@ class Command {
    * Run the command.
    */
   run() {
-    if (this.options.url) {
-      const formatter = new DefaultFormatter(program.verbose);
-      const request = new Request(merge(this.options, {
-        query: program.query,
-      }), formatter);
-
-      request.send();
+    // If no URL provided, just output help.
+    if (! this.options.url) {
+      this.program.outputHelp();
+      return;
     }
+
+    const formatter = new DefaultFormatter(program.verbose);
+    const request = new Request(merge(this.options, {
+      query: program.query,
+    }), formatter);
+
+    request.send();
   }
 }
 
