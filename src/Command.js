@@ -50,6 +50,12 @@ class Command {
 
     this.program.parse(argv);
 
+    // Merge the command-line flags into the options,
+    this.options = merge(this.options, {
+      query: this.program.query,
+      verbose: this.program.verbose,
+    });
+
     return this;
   }
 
@@ -63,10 +69,8 @@ class Command {
       return;
     }
 
-    const formatter = new DefaultFormatter(program.verbose);
-    const request = new Request(merge(this.options, {
-      query: program.query,
-    }), formatter);
+    const formatter = new DefaultFormatter(this.options.verbose);
+    const request = new Request(this.options, formatter);
 
     request.send();
   }
