@@ -1,6 +1,7 @@
 const program = require('commander');
 const Request = require('../src/Request');
 const DefaultFormatter = require('../src/DefaultFormatter');
+const FileFormatter = require('../src/FileFormatter');
 const { parseData, collectKeyValues, increaseVerbosity } = require('../src/helpers');
 const merge = require('lodash/merge');
 
