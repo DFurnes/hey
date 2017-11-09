@@ -3,18 +3,34 @@ const Request = require('../src/Request');
 const DefaultFormatter = require('../src/DefaultFormatter');
 const { parseData, collectKeyValues, increaseVerbosity } = require('../src/helpers');
 const merge = require('lodash/merge');
+const header = require('../plugins/header');
 
 class Command {
   constructor(defaults = {}) {
     this.program = program;
 
-    this.options = merge({'body': []}, defaults);
+    this.plugins = [
+      header
+    ];
+
+    this.options = merge({
+      'body': [],
+    }, defaults);
 
     // Set options for the command.
     this.program
-      .option('-H, --header <values>', 'Set the request headers.', collectKeyValues, {})
       .option('-q, --query <values>', 'Set the request query-string.', collectKeyValues, {})
       .option('-v, --verbose', 'Increase the verbosity of the formatter.', increaseVerbosity, 0);
+
+    for (let plugin of this.plugins) {
+      if (plugin.option) {
+        this.program.option(
+          plugin.option.flags,
+          plugin.option.descriptions,
+          collectKeyValues,
+          plugin.option.defaultValue);
+      }
+    }
 
     // Set the usage for the 'help' command.
     this.program.usage(`<url> ${this.options['body'] ? '[data]' : '' }`);
