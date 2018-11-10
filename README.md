@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <strong>hey (n.)</strong> – A handy command-line tool for making HTTP requests.
+  <strong>hey (n.)</strong> – A friendly command-line tool for making HTTP requests.
 </p>
 
 <p align="center">
